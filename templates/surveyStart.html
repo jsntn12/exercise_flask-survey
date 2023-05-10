@@ -1,6 +1,7 @@
-{% exted 'base.html%} {% clock content %}
+{% extends 'base.html' %} {% block title %} {% endblock %} {% block content %}
 
 <h1>{{ survey.title }}</h1>
+
 <p class="instruction-paragraph">{{ survey.instructions }}</p>
 
 <form action="/begin" method="POST">

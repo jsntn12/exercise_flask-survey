@@ -1,14 +1,15 @@
 from flask import Flask, request, render_template, flash
 from flask_debugtoolbar import DebugToolbarExtension
-from surveys import satisfaction_survey as SURVEY
+from surveys import satisfaction_survey as survey
 
 RESPONSE_KEY = "response"
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'secret'
+app.config["SECRET_KEY"] = "secret"
 
 debug = DebugToolbarExtension(app)
 
-@app.route('/')
+@app.route("/")
 def start_survey():
-    return render_template('survey_start.html')
+
+    return render_template("surveyStart.html", survey=survey)
