@@ -2,6 +2,7 @@ from flask import Flask, request, render_template, flash, redirect
 from flask_debugtoolbar import DebugToolbarExtension
 from surveys import satisfaction_survey as survey
 
+
 responses = []
 
 app = Flask(__name__)
@@ -11,6 +12,8 @@ debug = DebugToolbarExtension(app)
 app.config["DEBUG_TB_INTERCEPT_REDIRECTS"] = False
 
 current_question= {"active" : None}
+
+CURRENT_INDEX = current_question['active']
 
 @app.route("/")
 def start_survey():
@@ -30,6 +33,10 @@ def show_questions(questionID):
     
     elif current_question['active'] == None:
         return redirect("/")
+    
+    elif len(responses) != questionID:
+        flash(f"Invalid question id: {questionID}.")
+        return redirect(f'/question/{len(responses)}')
 
     current_question["active"] = questionID
     
