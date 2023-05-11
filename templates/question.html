@@ -3,8 +3,13 @@
 <form action="/answer" method="POST">
 	{% for choice in question.choices %}
 	<p>
-		<input type="radio" name="answer" value="{{ choice }}" class="question" />{{
-		choice }}
+		<input
+			type="radio"
+			name="answer"
+			value="{{ choice }}"
+			class="question"
+			required
+		/>{{ choice }}
 	</p>
 	{% endfor %}
 	<button>Continue</button>
