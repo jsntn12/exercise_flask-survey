@@ -27,26 +27,24 @@ def show_questions(questionID):
 
     if len(responses) == len(survey.questions):
         return redirect("/completed")
-    # elif len(response) == 0:
-    #     return redirect("/")
-    # elif len(response) != current_question:
-    #     return redirect(f"/question/{current_question}")
+    
+    elif current_question['active'] == None:
+        return redirect("/")
 
-    print(f"This is the question ID {questionID}, Status of obj {current_question['active'] }")
     current_question["active"] = questionID
+    
+    print(f"Survery length is {len(survey.questions) }This is the question ID {questionID}, Status of obj {current_question['active'] }")
     question = survey.questions[questionID]
 
     return render_template(f"question.html", question=question, question_num = questionID)
 
 @app.route("/answer", methods=["POST"])
 def answer():
-    choice = request.form['answer']
     responses.append(request.form["answer"])
-
+    if len(survey.questions) == current_question['active']:
+        return redirect("completed.html")
     return redirect(f"/question/{len(responses)}")
-    # update the current question to + 1
-    # get the input 
-    # save the ansewr to array 
+
 
 
 
