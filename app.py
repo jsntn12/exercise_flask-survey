@@ -28,8 +28,8 @@ def show_questions(questionID):
     print("---entered the question route-------")
     #if the len of response == questions return completed page 
 
-    # if len(response) == len(survey.questions):
-    #     return redirect("/completed")
+    if len(responses) == len(survey.questions):
+        return redirect("/completed")
     # elif len(response) == 0:
     #     return redirect("/")
     # elif len(response) != current_question:
@@ -41,12 +41,6 @@ def show_questions(questionID):
 
     print("*** right ** before ** the return **")
     return render_template(f"question.html", question=question, question_num = questionID)
-    
-    # corner case - user trying to access question out of order 
-    # corner case answer question before the start button 
-
-    # render template the page with the question using current count of questions 
-
 
 @app.route("/answer", methods=["POST"])
 def answer():
