@@ -1,7 +1,13 @@
-<!-- Extend base -->
+{% extends 'base.html' %} {% block content %}
+<div class="question">{{ question.question }}</div>
+<form action="/answer" method="POST">
+	{% for choice in question.choices %}
+	<p>
+		<input type="radio" name="answer" value="{{ choice }}" class="question" />{{
+		choice }}
+	</p>
+	{% endfor %}
+	<button>Continue</button>
+</form>
 
-<!-- load question count ad question with a class of question -->
-
-<!-- for choices in questions  -->
-
-<!-- button to continue -->
+{% endblock %}

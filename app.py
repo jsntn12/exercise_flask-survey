@@ -27,16 +27,20 @@ def redirect_to_questions():
 def show_questions(questionID):
     print("---entered the question route-------")
     #if the len of response == questions return completed page 
-    if len(response) == len(survey.questions):
-        return redirect("/completed")
-    elif len(response) == 0:
-        return redirect("/")
-    elif len(response) != current_question:
-        return redirect(f"/question/{current_question}")
-    
-    question = survey.question[questionID]
 
-    return render_template(f"/question.html", question=question, question_num = questionID)
+    # if len(response) == len(survey.questions):
+    #     return redirect("/completed")
+    # elif len(response) == 0:
+    #     return redirect("/")
+    # elif len(response) != current_question:
+    #     return redirect(f"/question/{current_question}")
+
+    print(f"This is the question ID {questionID}")
+    
+    question = survey.questions[questionID]
+
+    print("*** right ** before ** the return **")
+    return render_template(f"question.html", question=question, question_num = questionID)
     
     # corner case - user trying to access question out of order 
     # corner case answer question before the start button 
