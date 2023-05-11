@@ -2,7 +2,7 @@ from flask import Flask, request, render_template, flash, redirect
 from flask_debugtoolbar import DebugToolbarExtension
 from surveys import satisfaction_survey as survey
 
-response = []
+responses = []
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "secret"
@@ -48,9 +48,15 @@ def show_questions(questionID):
     # render template the page with the question using current count of questions 
 
 
-@app.route("/answer")
+@app.route("/answer", methods=["POST"])
 def answer():
-    ...
+    print("====== in the answer section ======")
+    choice = request.form['answer']
+    responses.append(request.form["answer"])
+
+
+    print(f"===== This is len of responses {len(responses)}")
+    return redirect(f"/question/{len(responses)}")
     # update the current question to + 1
     # get the input 
     # save the ansewr to array 
