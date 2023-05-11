@@ -1,0 +1,17 @@
+/* body of the item */
+.survey {
+  background-color: lightgray;
+  margin: 0;
+  padding: 0;
+font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+  background-color: white;
+  padding: 2em;
+  width: 75%;
+  margin: 0 auto;
+  text-align: center;
+  border-bottom-left-radius: .6em;
+  border-bottom-right-radius: .6em;
+}
