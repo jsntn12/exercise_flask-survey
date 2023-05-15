@@ -3,7 +3,7 @@
   background-color: lightgray;
   margin: 0;
   padding: 0;
-font-family: Arial, Helvetica, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .container {
@@ -14,4 +14,22 @@ font-family: Arial, Helvetica, sans-serif;
   text-align: center;
   border-bottom-left-radius: .6em;
   border-bottom-right-radius: .6em;
+}
+
+.flash_msg {
+  background-color: red;
+  color: white;
+}
+
+.instruction-paragraph{
+  color:teal;
+  font-size: 1.2em;
+}
+
+.question {
+  font-size: 2rem;
+}
+
+.thank-you-msg {
+  font-size: 3rem;
 }
