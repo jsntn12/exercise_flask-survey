@@ -55,4 +55,8 @@ def answer():
 
 @app.route("/completed")
 def load_completed():
+    responses = session.get(RESPONSES_KEY)
+    if not responses:
+        return redirect("/")
+
     return render_template("completed.html")
