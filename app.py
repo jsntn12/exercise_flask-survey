@@ -13,36 +13,40 @@ CURRENT_QUESTION = "active"
 
 @app.route("/")
 def start_survey():
-    session[CURRENT_QUESTION]= 0
+    session[CURRENT_QUESTION] = None
     return render_template("/surveyStart.html", survey=survey)
 
 @app.route("/begin", methods=["POST"])
 def redirect_to_questions():
+    session[CURRENT_QUESTION] = 0
     session[RESPONSES_KEY]= []
     return redirect("/question/0")
 
 @app.route("/question/<int:questionID>")
 def show_questions(questionID):
-    responses = session[RESPONSES_KEY]
+    responses = session.get(RESPONSES_KEY)
     current_question = session[CURRENT_QUESTION]
 
     if len(responses) == len(survey.questions):
         return redirect("/completed")
     
-    elif current_question == False:
+    elif current_question == None:
         return redirect("/")
     
     elif len(responses) != questionID:
         flash(f"Invalid question id: {questionID}.")
         return redirect(f'/question/{len(responses)}')
 
-    current_question = questionID
+    session[CURRENT_QUESTION] = questionID
     question = survey.questions[questionID]
     return render_template(f"question.html", question=question, question_num = questionID)
 
 @app.route("/answer", methods=["POST"])
 def answer():
-    session[RESPONSES_KEY].append(request.form["answer"])
+    form_answer = request.form["answer"]
+    responses = session[RESPONSES_KEY]
+    responses.append(form_answer)
+    session[RESPONSES_KEY] = responses
 
     if len(survey.questions) == session[CURRENT_QUESTION]:
         return redirect("completed.html")
